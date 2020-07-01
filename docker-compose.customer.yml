@@ -1,0 +1,54 @@
+version: '3.5'
+services:
+  service:
+    image: domaintools/elastic_integration:latest
+    container_name: dt_service_1
+    command: gunicorn --workers=4 --timeout=60 -b 0.0.0.0:8000 app.run:app --log-level=info --pid=gunicorn.pid
+    env_file:
+      - .env
+    ports:
+      - "8000:8000"
+    networks:
+      - dt_network
+  rabbit:
+    hostname: rabbit
+    image: rabbitmq:management
+    container_name: dt_rabbit_1
+    environment:
+    - RABBITMQ_DEFAULT_USER=${RABBITMQ_USER}
+    - RABBITMQ_DEFAULT_PASS=${RABBITMQ_PASS}
+    ports:
+    - "5673:5672"
+    - "15672:15672"
+    networks:
+      - dt_network
+  celery:
+    image: domaintools/elastic_integration:latest
+    hostname: celery_worker_1
+    container_name: dt_celery_1
+    command: celery worker -A app.tasks.celery --loglevel=INFO --pidfile=celery.pid
+    env_file:
+      - .env
+    links:
+      - rabbit
+    depends_on:
+      - rabbit
+    networks:
+      - dt_network
+  beat:
+    image: domaintools/elastic_integration:latest
+    hostname: celery_beat
+    container_name: dt_beat_1
+    command: celery beat -A app.tasks.celery --loglevel=INFO --pidfile=
+    env_file:
+      - .env
+    depends_on:
+      - celery
+      - rabbit
+    networks:
+      - dt_network
+
+networks:
+  dt_network:
+    name: domaintools_default
+    driver: bridge
