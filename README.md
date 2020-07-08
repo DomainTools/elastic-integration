@@ -34,20 +34,20 @@ To test and verify logstash config files run:
 
 # Notes for Customer:
 
-Problem: Out of band deletion of indices may cause problems
+Out of band deletion of indices may cause problems
 
-Solution: restart dt_service_1 python background docker container to recreate indices
+*Solution:* restart dt_service_1 python background docker container to recreate indices
 
 # Troubleshooting
 
-##### Problem: Test connection errors
+#### Problem: Test connection errors
 
-Solution:
+*Solution:*
 - Can kibana talk to python service?
 - Are the DomainTools API credentials correct?
 
 #### Problem: Data not being enriched
 
-Solution:
+*Solution:*
 - Make sure the field in logstash is being extracted correctly
 - Make sure service url is pointing to the service
