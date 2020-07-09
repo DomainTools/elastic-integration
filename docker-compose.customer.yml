@@ -3,10 +3,12 @@ services:
   service:
     image: domaintools/elastic_integration:latest
     container_name: dt_service_1
+    # the port used here is very important, default is 8000 and needs to be used in ports section below
     command: gunicorn --workers=4 --timeout=60 -b 0.0.0.0:8000 app.run:app --log-level=info --pid=gunicorn.pid
     env_file:
       - .env
     ports:
+      # matches port used above in command for gunicorn call
       - "8000:8000"
     networks:
       - dt_network
