@@ -6,6 +6,13 @@ DomainTools Elastic Integration
 - deployment/install necessities
 - logstash config templates customer can use
 
+### Recommended Start Up Order
+
+1. Elasticsearch
+1. DomainTools Backend Python Service (Docker)
+1. Kibana
+1. Setup Logstash config
+1. Logstash
 
 ### Install Background Service
 
@@ -51,3 +58,4 @@ Out of band deletion of indices may cause problems
 *Solution:*
 - Make sure the field in logstash is being extracted correctly
 - Make sure service url is pointing to the service
+
