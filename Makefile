@@ -9,7 +9,7 @@ help: # Display help
 
 .PHONY : env
 env: ## Create .env file from .env.template
-	@if [ ! -f .env ]; then cp .env.example .env; echo '.env did not exist, created it from .env.example, please review and then re-run install'; exit; fi
+	@if [ ! -f .env ]; then cp .env.example .env; echo '.env did not exist, created it from .env.example, please review and then re-run install with make install'; exit; fi
 
 .PHONY : install
 install : env ## setup docker containers

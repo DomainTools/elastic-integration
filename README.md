@@ -20,6 +20,8 @@ DomainTools Elastic Integration
 /bin/bash -c “$(curl -fsSL https://github.com/DomainTools/elastic-integration/raw/main/install.sh)”
 ```
 
+If you don't have a `.env` file yet, this will create one from `.env.example` and notify you to edit it and retry `make install`
+
 ### Install Kibana Plugin
 
 - assuming your kibana install is located at /usr/share/kibana
