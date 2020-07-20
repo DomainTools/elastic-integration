@@ -13,6 +13,8 @@ DomainTools Elastic Integration
 1. Kibana
 1. Setup Logstash config
 1. Logstash
+1. Setup Filebeat config
+1. Filebeat
 
 ### Install Background Service
 
