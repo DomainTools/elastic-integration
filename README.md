@@ -29,7 +29,7 @@ If you don't have a `.env` file yet, this will create one from `.env.example` an
 - assuming your kibana install is located at /usr/share/kibana
 
 ```bash
-/usr/share/kibana/bin/kibana-plugin install https://github.com/DomainTools/elastic-integration/raw/main/domaintools7.5.2-[current version].zip
+/usr/share/kibana/bin/kibana-plugin install https://github.com/DomainTools/elastic-integration/raw/main/domaintools[elastic-version]-[current version].zip
 ```
 
 # TESTING LOGSTASH
@@ -45,9 +45,28 @@ To test and verify logstash config files run:
 
 # Notes for Customer:
 
-Out of band deletion of indices may cause problems
+#### Out of band deletion of indices may cause problems
 
 *Solution:* restart dt_service_1 python background docker container to recreate indices
+
+#### Ensure LOG_SOURCES environment variable list matches los source names you've put in your Logstash configs
+
+*Example:*
+
+```bash
+# in .env
+LOG_SOURCES="squidproxy*"
+```
+
+```bash
+# in logstash.conf
+...
+    body => {
+	"url" => "%{${DOMAIN_FIELD}}"
+	"index" => "squidproxy*"  # <--- THIS
+    }
+...
+```
 
 # Troubleshooting
 
