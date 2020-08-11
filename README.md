@@ -9,12 +9,13 @@ DomainTools Elastic Integration
 ### Recommended Start Up Order
 
 1. Elasticsearch
-1. DomainTools Backend Python Service (Docker)
-1. Kibana
-1. Setup Logstash config
 1. Logstash
+1. Setup Logstash config
+1. Filebeat
 1. Setup Filebeat config
 1. Filebeat
+1. DomainTools Backend Python Service (Docker)
+1. Kibana with DomainTools plugin
 
 ### Install Background Service
 
@@ -48,25 +49,6 @@ To test and verify logstash config files run:
 #### Out of band deletion of indices may cause problems
 
 *Solution:* restart dt_service_1 python background docker container to recreate indices
-
-#### Ensure LOG_SOURCES environment variable list matches los source names you've put in your Logstash configs
-
-*Example:*
-
-```bash
-# in .env
-LOG_SOURCES="squidproxy*"
-```
-
-```bash
-# in logstash.conf
-...
-    body => {
-	"url" => "%{${DOMAIN_FIELD}}"
-	"index" => "squidproxy*"  # <--- THIS
-    }
-...
-```
 
 # Troubleshooting
 
