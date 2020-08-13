@@ -39,7 +39,7 @@ Edit the files in the setup folder.  Replace the following text:
 
 - ES_HOST_PROTOCOL (http or https usually)
 - ES_HOST (ip address or domain name)
-- ES_PORTE (usually 9200)
+- ES_PORT (usually 9200)
 - INDEX_NAME_FROM_LOGSTASH_CONF (something like squidproxy)
 - YOUR_BASE64_ENCODED_AUTH
 
