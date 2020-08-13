@@ -35,7 +35,7 @@ If you don't have a `.env` file yet, this will create one from `.env.example` an
 
 # SETTING UP LOG SOURCE ILM POLICY, TEMPLATE AND INDEX
 
-Edit the files in the setup folder.  Replace the following text:
+Edit the numbered files in the setup folder.  Replace the following text:
 
 - ES_HOST_PROTOCOL (http or https usually)
 - ES_HOST (ip address or domain name)
@@ -44,9 +44,7 @@ Edit the files in the setup folder.  Replace the following text:
 - YOUR_BASE64_ENCODED_AUTH
 
 ```bash
-./setup/create_log_source_ilm_policy.sh
-./setup/create_log_source_index_template.sh
-./setup/create_initial_log_source_index.sh
+./setup/run.sh
 ```
 
 If these are not setup in Elasticsearch then when Logstash sends events to Elasticsearch, the event index rolloever process will not work and our parsing of that index will fail.
