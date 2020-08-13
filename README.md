@@ -9,13 +9,14 @@ DomainTools Elastic Integration
 ### Recommended Start Up Order
 
 1. Elasticsearch
-1. DomainTools Backend Python Service (Docker)
+1. Setup log source items (below)
 1. Kibana with DomainTools plugin
-1. Logstash
 1. Setup Logstash config
-1. Filebeat
+1. Logstash
 1. Setup Filebeat config
 1. Filebeat
+1. Setup .env file
+1. DomainTools Backend Python Service (Docker)
 
 ### Install Background Service
 
@@ -30,10 +31,16 @@ If you don't have a `.env` file yet, this will create one from `.env.example` an
 - assuming your kibana install is located at /usr/share/kibana
 
 ```bash
-/usr/share/kibana/bin/kibana-plugin install https://github.com/DomainTools/elastic-integration/raw/main/domaintools[elastic-version]-[current version].zip
+/usr/share/kibana/bin/kibana-plugin install https://github.com/DomainTools/elastic-integration/raw/main/domaintools[elastic-version]-[DomainTools version].zip
 ```
 
-# SETTING UP LOG SOURCE ILM POLICY, TEMPLATE AND INDEX
+### SETTING UP LOG SOURCE ITEMS
+
+Items being setup:
+
+- ILM Policy - handler of rotating related event source indices
+- Index template - the template (mappings, etc) to use for newly created indices in the ILM policy
+- Initial index - the starter index (mapping matches index template mapping)
 
 Edit the numbered files in the setup folder.  Replace the following text:
 
@@ -41,7 +48,7 @@ Edit the numbered files in the setup folder.  Replace the following text:
 - ES_HOST (ip address or domain name)
 - ES_PORT (usually 9200)
 - INDEX_NAME_FROM_LOGSTASH_CONF (something like squidproxy)
-- YOUR_BASE64_ENCODED_AUTH
+- YOUR_BASE64_ENCODED_AUTH (your base64 encoded username and password to Elasticsearch)
 
 ```bash
 ./setup/run.sh
@@ -49,7 +56,7 @@ Edit the numbered files in the setup folder.  Replace the following text:
 
 If these are not setup in Elasticsearch then when Logstash sends events to Elasticsearch, the event index rolloever process will not work and our parsing of that index will fail.
 
-# TESTING LOGSTASH
+### TESTING LOGSTASH
 
 To test and verify logstash config files run:
 
@@ -60,7 +67,7 @@ To test and verify logstash config files run:
 - `--path.settings /etc/logstash` is the flag to point to the directory holding the logstash.yml file
 - `-t` is the flag to test the config 
 
-# Notes for Customer:
+### Notes for Customer:
 
 #### Out of band deletion of indices may cause problems
 
