@@ -9,13 +9,13 @@ DomainTools Elastic Integration
 ### Recommended Start Up Order
 
 1. Elasticsearch
+1. DomainTools Backend Python Service (Docker)
+1. Kibana with DomainTools plugin
 1. Logstash
 1. Setup Logstash config
 1. Filebeat
 1. Setup Filebeat config
 1. Filebeat
-1. DomainTools Backend Python Service (Docker)
-1. Kibana with DomainTools plugin
 
 ### Install Background Service
 
@@ -32,6 +32,24 @@ If you don't have a `.env` file yet, this will create one from `.env.example` an
 ```bash
 /usr/share/kibana/bin/kibana-plugin install https://github.com/DomainTools/elastic-integration/raw/main/domaintools[elastic-version]-[current version].zip
 ```
+
+# SETTING UP LOG SOURCE ILM POLICY, TEMPLATE AND INDEX
+
+Edit the files in the setup folder.  Replace the following text:
+
+- ES_HOST_PROTOCOL (http or https usually)
+- ES_HOST (ip address or domain name)
+- ES_PORTE (usually 9200)
+- INDEX_NAME_FROM_LOGSTASH_CONF (something like squidproxy)
+- YOUR_BASE64_ENCODED_AUTH
+
+```bash
+./setup/create_log_source_ilm_policy.sh
+./setup/create_log_source_index_template.sh
+./setup/create_initial_log_source_index.sh
+```
+
+If these are not setup in Elasticsearch then when Logstash sends events to Elasticsearch, the event index rolloever process will not work and our parsing of that index will fail.
 
 # TESTING LOGSTASH
 
