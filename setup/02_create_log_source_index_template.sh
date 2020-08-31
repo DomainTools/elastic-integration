@@ -1,18 +1,18 @@
 #!/bin/bash
 
-curl --location --request PUT 'ES_PROTOCOL://ES_HOST:ES_PORT/_template/INDEX_NAME_FROM_LOGSTASH_CONF_template' \
+curl --location --request PUT 'ES_PROTOCOL://ES_HOST:ES_PORT/_template/dt-alias-template' \
 --header 'Content-Type: application/json' \
 --header 'Authorization: Basic YOUR_BASE_64_ENCODED_AUTH' \
 --data-raw '{
     "order": 0,
     "index_patterns": [
-        "INDEX_NAME_FROM_LOGSTASH_CONF-*"
+        "dt-events-*"
     ],
     "settings": {
         "index": {
             "lifecycle": {
                 "name": "domaintools_policy",
-                "rollover_alias": "INDEX_NAME_FROM_LOGSTASH_CONF"
+                "rollover_alias": "dt-alias"
             },
             "number_of_shards": "1",
             "number_of_replicas": "1"

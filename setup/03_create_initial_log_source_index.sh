@@ -1,6 +1,6 @@
 #!/bin/bash
 
-curl --location --request PUT 'ES_PROTOCOL://ES_HOST:ES_PORT/INDEX_NAME_FROM_LOGSTASH_CONF-000001' \
+curl --location --request PUT 'ES_PROTOCOL://ES_HOST:ES_PORT/dt-events-000001' \
 --header 'Content-Type: application/json' \
 --header 'Authorization: Basic YOUR_BASE64_ENCODED_AUTH' \
 --data-raw '{
@@ -16,7 +16,7 @@ curl --location --request PUT 'ES_PROTOCOL://ES_HOST:ES_PORT/INDEX_NAME_FROM_LOG
     }
   },
   "aliases" : {
-        "test-alias" : {}
+        "dt-alias" : {}
     },
   "mappings": {
     "properties": {
