@@ -2,7 +2,7 @@
 
 curl --location --request PUT 'ES_PROTOCOL://ES_HOST:ES_PORT/_template/dt-alias-template' \
 --header 'Content-Type: application/json' \
---header 'Authorization: Basic YOUR_BASE_64_ENCODED_AUTH' \
+--header 'Authorization: Basic YOUR_BASE64_ENCODED_AUTH' \
 --data-raw '{
     "order": 0,
     "index_patterns": [

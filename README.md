@@ -42,16 +42,6 @@ Items being setup:
 - Index template - the template (mappings, etc) to use for newly created indices in the ILM policy
 - Initial index - the starter index (mapping matches index template mapping)
 
-Edit the numbered files in the setup folder.  Replace the following text:
-
-- ES_HOST_PROTOCOL (http or https usually)
-- ES_HOST (ip address or domain name)
-- ES_PORT (usually 9200)
-- YOUR_BASE64_ENCODED_AUTH (your base64 encoded username and password to Elasticsearch)
-	- can be generated with `echo -n 'USERNAME:PASSWORD' | openssl base64` (replace USERNAME and PASSWORD)
-
-Please replace `dt-alias` in the files with whatever you have in your logstash configuration output->elasticsearch->index like [here](conf/logstash/logstash.conf#L36)
-
 ```bash
 ./setup/run.sh
 ```
