@@ -43,8 +43,8 @@ then
 		echo $SCRIPT_FULL_PATHS | xargs sed -i '' -e "s/YOUR_BASE64_ENCODED_AUTH/$CREDS/g"
 	fi
 	echo "template text replacement complete, running scripts"
-	#./01_create_log_source_ilm_policy.sh
-	#./02_create_log_source_index_template.sh
-	#./03_create_initial_log_source_index.sh
+	./01_create_log_source_ilm_policy.sh
+	./02_create_log_source_index_template.sh
+	./03_create_initial_log_source_index.sh
 	echo "scripts run successfully"
 fi
